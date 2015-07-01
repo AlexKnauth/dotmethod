@@ -1,5 +1,7 @@
 #lang dotmethod racket
 
+provide rmv conj ref fst rst len
+
 require rackunit
 
 dotmethods
