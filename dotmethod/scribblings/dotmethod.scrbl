@@ -52,6 +52,15 @@ let ([ht (hash 'a 1 'b 2 'c 3)])
   values
     ht.ref('a)
     ht.ref('d 'not-found)
+define adder%
+  class object% (super-new)
+    init-field a
+    define/public add(b)
+      (+ a b)
+dotmethod (is-a?/c adder%) adder.add(b)
+  (send adder add b)
+define five-adder (make-object adder% 5)
+five-adder.add(2)
 }|
 }
 

@@ -49,3 +49,17 @@ check-equal? vec '#(1 2 3)
 check-equal? vec.len 3
 check-equal? hsh.ref('a) 1
 check-equal? hsh.rmv('b) hash('a 1 'c 3)
+
+define adder%
+  class object% (super-new)
+    init-field a
+    define/public add(b)
+      (+ a b)
+
+dotmethod (is-a?/c adder%) adder.add(b)
+  (send adder add b)
+
+define five-adder (make-object adder% 5)
+
+check-equal? five-adder.add(2) 7
+
