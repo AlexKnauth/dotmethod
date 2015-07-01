@@ -10,3 +10,9 @@
                "my-cond"
                ))
 
+(define build-deps '("racket-doc"
+                     "rackunit-lib"
+                     "scribble-code-examples"
+                     "scribble-lib"
+                     ))
+

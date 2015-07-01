@@ -11,7 +11,6 @@ require syntax/parse/define
 module+ test
   require rackunit
           racket/vector
-          sweet-exp-utils/kw-let
 
 define-syntax maybe-define-dotmethod
   syntax-parser
@@ -59,7 +58,7 @@ module+ test
       (cons x lst)
     vector? vec.conj(x)
       (vector-append vec (vector x))
-  kw-let #:lst '(1 2 3) #:vec '#(1 2 3)
+  let ([lst '(1 2 3)] [vec '#(1 2 3)])
     check-equal? lst.rmv(2) '(1 3)
     check-equal? lst.conj(4) '(4 1 2 3)
     check-equal? vec.conj(4) '#(1 2 3 4)
