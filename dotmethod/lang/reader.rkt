@@ -9,13 +9,17 @@
          (only-in postfix-dot-notation/reader make-postfix-dot-readtable)
          (only-in (submod sweet-exp reader) [read-syntax sweet-read-syntax]))
 
-(define (dotmethod-read-syntax src in)
+(define (dotmethod-read-syntax src in p ln col pos)
   (define stx (parameterize ([current-readtable (make-afl-readtable (make-postfix-dot-readtable))])
-                (sweet-read-syntax src in #f #f #f #f)))
+                (sweet-read-syntax src in p ln col pos)))
   (syntax-parse stx #:datum-literals (module)
     [(module name language body ...)
-     #:with new-lang (generate-temporary (format-id #f "dotmethod-~a" #'language #:source #'language))
-     #:with submod-..-new-lang (syntax/loc #'language (submod ".." new-lang))
+     #:with new-lang-id
+     (generate-temporary (format-id #f "dotmethod-~a" #'language))
+     #:with new-lang
+     (datum->syntax #'language (syntax-e #'new-lang-id) #'language #'language)
+     #:with submod-..-new-lang
+     (datum->syntax #'language `(submod ".." ,#'new-lang) #'language #'language)
      #'(module name racket/base
          (module new-lang racket/base
            (require racket/require
