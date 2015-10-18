@@ -1,4 +1,4 @@
-dotmethod
+dotmethod [![Build Status](https://travis-ci.org/AlexKnauth/dotmethod.png?branch=master)](https://travis-ci.org/AlexKnauth/dotmethod)
 ===
 obj.method(x) in racket (generalized)
 
