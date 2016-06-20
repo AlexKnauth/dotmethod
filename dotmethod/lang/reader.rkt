@@ -5,13 +5,13 @@
 
 (require syntax/parse
          racket/syntax
-         (only-in afl/reader make-afl-readtable)
+         (only-in afl/reader [wrap-reader afl-wrap-reader])
          (only-in postfix-dot-notation/reader make-postfix-dot-readtable)
          (only-in (submod sweet-exp reader) [read-syntax sweet-read-syntax]))
 
 (define (dotmethod-read-syntax src in p ln col pos)
-  (define stx (parameterize ([current-readtable (make-afl-readtable (make-postfix-dot-readtable))])
-                (sweet-read-syntax src in p ln col pos)))
+  (define stx (parameterize ([current-readtable (make-postfix-dot-readtable)])
+                ((afl-wrap-reader sweet-read-syntax) src in p ln col pos)))
   (syntax-parse stx #:datum-literals (module)
     [(module name language body ...)
      #:with new-lang-id
