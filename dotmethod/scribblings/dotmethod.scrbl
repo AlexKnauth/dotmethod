@@ -6,7 +6,7 @@
 @title{dotmethod}
 
 This package provides both a @racketmodname[dotmethod/dotmethod] module to be
-required and a @hash-lang[] @racketmodname[dotmethod] meta-language.
+required and a @hash-lang[] @racketmodname[dotmethod] lang-extension.
 
 Both of these provide functionality for @litchar{obj.method(x)}-style method
 definitions and method calls, but generalized to be used for all data types that
@@ -18,7 +18,7 @@ can be distinguished by predicates.
 
 A @racket[require] module intended to be used along with the
 @racketmodname[sweet-exp] and @racketmodname[postfix-dot-notation]
-meta-languages together, for example:
+lang-extensions together, for example:
 
 @codeblock[#:keep-lang-line? #t]|{
 #lang postfix-dot-notation sweet-exp racket
@@ -94,7 +94,7 @@ let ([ht (hash 'a 1 'b 2 'c 3)])
 @section{#lang dotmethod}
 
 @defmodule[dotmethod #:lang]{
-A meta-language for dotmethods so that
+A lang-extension for dotmethods so that
 @codeblock[#:keep-lang-line? #t]|{
 #lang dotmethod your-base-language
 }|
